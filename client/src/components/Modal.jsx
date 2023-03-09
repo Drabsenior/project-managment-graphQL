@@ -1,12 +1,31 @@
 import  { useState } from 'react'
 import {AiOutlineClose} from 'react-icons/ai'
+import {useMutation} from '@apollo/client'
+import { ADD_CLIENT } from '../mutations/clientMutation'
+import { GET_CLIENTS } from '../queries/clientQuery'
 const Modal = ({setShowModal}) => {
     const [formData,setFormData]= useState({name:"",email:"",phone:""})
     const {name,email,phone}  = formData
-
+    const [addClient]=useMutation(ADD_CLIENT,{
+        variables:{name,email,phone},
+        update(cache,{data:{addClient}}){
+            const {clients} = cache.readQuery({
+                query:GET_CLIENTS,
+            });
+            cache.writeQuery({
+                query:GET_CLIENTS,
+                data:{clients:{...clients,addClient}}
+            })
+        }
+    })
     const handleSubmit = (e)=>{
         e.preventDefault()
         console.log(formData)
+        if(name==="" || email===""||phone===""){
+            return alert('please fill in all fields')
+        }
+        addClient(name,email,phone)
+        setFormData({name:"",email:"",phone:""})
         setShowModal(false)
     }
   return (
