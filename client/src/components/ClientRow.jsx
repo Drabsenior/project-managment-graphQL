@@ -1,18 +1,22 @@
 import {BsTrash} from 'react-icons/bs'
 import { DELETE_CLIENT } from '../mutations/clientMutation'
-import { GET_CLIENTS } from '../queries/clientQuery'
 import {useMutation} from '@apollo/client'
+import { GET_PROJECTS } from '../queries/projectQuery'
+import { query } from 'express'
+import { GET_CLIENTS } from '../queries/clientQuery'
 const ClientRow = ({client}) => {
     const [deleteClient] = useMutation(DELETE_CLIENT,{
         variables:{id:client.id},
-        update(cache,{data:{deleteClient}}){
-            const {clients} = cache.readQuery({
-                query:GET_CLIENTS});
-                cache.writeQuery({
-                query:GET_CLIENTS,
-                data:{clients:clients.filter(client=>client.id !== deleteClient.id)}
-            })
-        }
+        refetchQueries:[{query:GET_PROJECTS},{query:GET_CLIENTS}],
+        
+        // update(cache,{data:{deleteClient}}){
+        //     const {clients} = cache.readQuery({
+        //         query:GET_CLIENTS});
+        //         cache.writeQuery({
+        //         query:GET_CLIENTS,
+        //         data:{clients:clients.filter(client=>client.id !== deleteClient.id)}
+        //     })
+        // }
     })
   return (
    <tr className='border-b bg-neutral-200' >

@@ -11,7 +11,7 @@ const Projects = () => {
     if(error) return <p>something went wrongs</p>
   return <>
     <h1 className=" my-4 text-2xl font-semibold max-w-6xl mx-auto px-4">Projects</h1>
-    <div className="flex justify-center items-center flex-row">
+    <div className="flex justify-center items-center flex-row flex-wrap ">
 
   {
       data.projects.length > 0 ? ( data.projects.map((project)=>(

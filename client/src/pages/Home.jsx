@@ -3,7 +3,7 @@ import Projects from '../components/Projects'
 
 const Home = () => {
   return (
-    <div>
+    <div className='py-4 mb-10'>
            <Projects/>
     <Clients/>
     </div>

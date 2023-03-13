@@ -1,4 +1,3 @@
-const {projects,clients} = require('../sampledata.js')
 
 const graphql = require('graphql')
 
@@ -99,8 +98,16 @@ const mutation = new GraphQLObjectType({
             args:{
                 id:{type:GraphQLNonNull(GraphQLID)}
             },
-            resolve(paretn,args){
+            resolve(parent,args){
+                Project.find({clientId:args.id}).then((projects)=>{
+                    console.log(projects)
+                    projects.forEach(project=>{
+                        project.deleteOne()
+                    })
+                })
                 return Client.findByIdAndDelete(args.id)
+                    
+                    
             }
         },
         //add project

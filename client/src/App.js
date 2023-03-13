@@ -1,6 +1,5 @@
 import Header from "./components/Header";
 import {ApolloClient,InMemoryCache,ApolloProvider} from '@apollo/client'
-import Clients from "./components/Clients";
 import {BrowserRouter as Router ,Route,Routes} from 'react-router-dom'
 import Home from "./pages/Home";
 import Nopage from "./pages/Nopage";
