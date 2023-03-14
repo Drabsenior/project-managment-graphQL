@@ -2,7 +2,6 @@ import {BsTrash} from 'react-icons/bs'
 import { DELETE_CLIENT } from '../mutations/clientMutation'
 import {useMutation} from '@apollo/client'
 import { GET_PROJECTS } from '../queries/projectQuery'
-import { query } from 'express'
 import { GET_CLIENTS } from '../queries/clientQuery'
 const ClientRow = ({client}) => {
     const [deleteClient] = useMutation(DELETE_CLIENT,{
